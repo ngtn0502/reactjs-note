@@ -11,13 +11,13 @@ some little note by myself to remind what i did learn
 | No. | Content                                                                     |
 | --- | --------------------------------------------------------------------------- |
 |     |                                                                             |
-| 1   | [Redux](#redux)                                                             |
-|     | [Redux middleware](#redux-middleware)                                       |
-| 2   | [ReactDOM - memo - callback](#react-and-reactdom-and-memo-and-callback)     |
-| 3   | [Closure in ReactJS](#closure-in-reactjs) - DIFFICULT                       |
+| 1   | [ReactDOM - memo - callback](#react-and-reactdom-and-memo-and-callback)     |
+| 2   | [Closure in ReactJS](#closure-in-reactjs) - DIFFICULT                       |
 | 3   | [State scheduling and batching](#state-scheduling-and-batching) - DIFFICULT |
-
----
+| 4   | [Redux](#redux)                                                             |
+|     | [Redux middleware](#redux-middleware)                                       |
+|     | [Redux in HOOK](#redux-in-functional-component)                             |
+|     | [Redux in CLASS](#redux-in-class-based-component)                           |
 
 ---
 
@@ -102,9 +102,9 @@ lecture 159 - watch again
 
 ---
 
-# Section xx
+# Section 18
 
-# Redux
+# Redux in CLASS-BASED COMPONENT
 
 1. Create `root reducer` contain all `reducer member`
 
@@ -135,13 +135,82 @@ Sinh ra để tối ưu performance cho code
 
 Để không cần `dispatch` data sau khi call `APIs`, ta cần dùng `middleware` redux-thunk, redux-saga => call `APIs` ngay trong action
 
- <img src="./public/drawMiddleware.png" alt="d">
+ <img src="./public/1.png" alt="d">
 
 ---
 
 Ta `call APIs` trong `action` không cần thông qua component
 
 Nói ngắn gọn `middleware` giúp chúng ta xử lý bất đồng bộ trong `action`, **_dispatch an action in action_**
+
+---
+
+# Redux in FUNCTIONAL COMPONENT
+
+1. There is one `store` to store all the `state` data and pass down data to all component
+2. => component never directly mutate `state`, component just `dispatch action` to reducer
+3. => `reducer` will process all the logic and return `state` to store
+4. => component will connect/subscribe to `store` and use that data
+
+ <img src="./public/2.png" alt="d">
+
+---
+
+**_In the component:_**
+
+- `useSelector` and `useStore` => `react-redux` will automatically manage `connect` our component to redux store =>allow `retrieve` state from **_store to component_** by callback function will be call by redux
+
+-`useDispatch` help us to `dispatch` `action` from **_component to store_**
+
+---
+
+## Redux in class-based and functional component
+
+**_difference_**: different about how to `connect component to store`, `retrieve data` and `dispatch data`
+
+`useStore`, `useSelector` help us `connect` component with the store equivalent to `connect` function and `mapStateToProps`
+
+`useDispatch` equivalent to `mapDispatchToProps`
+
+## When return state in Redux // IMUTABLE IN REDUX
+
+when return `state` in `Redux` you must **_return all the state_** with the state update, if you just return one state it will `replace` (because redux wont `merge` the state)
+
+## Redux toolkit
+
+Purpose:
+
+1. Help us prevent accidentally use the same `action type`
+2. Help us return `state` value
+3. Help us
+
+---
+
+I. **_createSlice_**: create Reducer
+in `Redux toolkit` it allow us to `mutate` directly the `state`
+
+`createSlice` to replace `reducer` it provide reducer method to avoid accidentally use the same `action type`
+
+```
+const mainSlice = createSlice({
+  name: 'name reducer',
+  initialState: 'init',
+  reducer: 'reducer of that state' - it a map to all the reducer that Slice need
+})
+```
+
+II. **_configureStore_**: merge reducer
+`configureStore` help use to merge all the small reducer to one big reducer
+
+```
+const store = configureStore({
+  reducer: {name: mainSlice}
+})
+```
+
+III. **_mainSlice.action_** : Action creator
+
+that is a `object` that contain all the `reducer method` that allow us to create `unique indentifier value` for the `action type`
 
 ---
 
