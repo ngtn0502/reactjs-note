@@ -176,6 +176,67 @@ Nói ngắn gọn `middleware` giúp chúng ta xử lý bất đồng bộ trong
 
 when return `state` in `Redux` you must **_return all the state_** with the state update, if you just return one state it will `replace` (because redux wont `merge` the state)
 
+lecture 254 4p
+
+**_IMPORTANT_**: because `reducer` are `pure function` => you should never `mutate` state directly
+=> with `primitive value` you can do that, because you change state in `reducer` does not `reference` to state in `redux store`
+
+ <img src="./public/3.png" alt="d">
+
+---
+
+=> with `reference value` if we `mutate` state in `reducer` directly => it will lead to the change `state` in `redux store`
+
+a way to avoid mutate:
+
+```
+  if (action.type === ADD_TO_CART) {
+    const { amountCart, products, mainColor, id } = action.payload;
+    const tempItem = state.cart.find((item) => {
+      return item.id === id + mainColor;
+    });
+    if (tempItem) {
+      // Create new updated array - hold all value of old array and over write the amount of object that already exist
+      const temp = state.cart.map((product) => {
+        if (product.id === id + mainColor) {
+          let newAmount = product.item + amountCart;
+          if (newAmount > product.max) {
+            newAmount = product.max;
+          }
+          return { ...product, item: newAmount };
+        } else {
+          return product;
+        }
+      });
+      //
+      // Return all the state and over write the cart in every render
+      return {
+        ...state,
+        cart: temp,
+      };
+    } else {
+      // Create new array if it does not exist in the CART
+
+      const newItem = {
+        id: id + mainColor,
+        color: mainColor,
+        image: products.images[0].url,
+        name: products.name,
+        price: products.price,
+        item: amountCart,
+        max: products.stock,
+      };
+      // Create newItem object in the cart
+      return {
+        ...state,
+        cart: [...state.cart, newItem],
+      };
+    }
+  }
+```
+
+## Async Code in Redux
+
 ## Redux toolkit
 
 Purpose:
