@@ -8,13 +8,14 @@ some little note by myself to remind what i did learn
 
 ## Things worth to review:
 
-| No. | Content                                                                             |
-| --- | ----------------------------------------------------------------------------------- |
-|     |                                                                                     |
-| 1   | [Redux](#redux) - DIFFICULT                                                         |
-| 2   | [ReactDOM - memo - callback](#react-and-reactdom-and-memo-and-callback) - DIFFICULT |
-| 3   | [Closure in ReactJS](#closure-in-reactjs) - DIFFICULT                               |
-| 3   | [State scheduling and batching](#state-scheduling-and-batching) - DIFFICULT         |
+| No. | Content                                                                     |
+| --- | --------------------------------------------------------------------------- |
+|     |                                                                             |
+| 1   | [Redux](#redux)                                                             |
+|     | [Redux middleware](#redux-middleware)                                       |
+| 2   | [ReactDOM - memo - callback](#react-and-reactdom-and-memo-and-callback)     |
+| 3   | [Closure in ReactJS](#closure-in-reactjs) - DIFFICULT                       |
+| 3   | [State scheduling and batching](#state-scheduling-and-batching) - DIFFICULT |
 
 ---
 
@@ -125,6 +126,22 @@ lecture 159 - watch again
 When we change state in `state object` -> Because object are `reference`, so Redux does not know `state` object change.
 
 => we have to return new `{...state}` to make sure the `state` change and it re-render every component that use this state
+
+---
+
+### Redux middleware
+
+Sinh ra để tối ưu performance cho code
+
+Để không cần `dispatch` data sau khi call `APIs`, ta cần dùng `middleware` redux-thunk, redux-saga => call `APIs` ngay trong action
+
+ <img src="./public/drawMiddleware.png" alt="d">
+
+---
+
+Ta `call APIs` trong `action` không cần thông qua component
+
+Nói ngắn gọn `middleware` giúp chúng ta xử lý bất đồng bộ trong `action`, **_dispatch an action in action_**
 
 ---
 
