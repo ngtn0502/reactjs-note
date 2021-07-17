@@ -140,7 +140,7 @@ It is a best practice to put all the `logic code` to `reducer`, and `async code`
 
 ---
 
- <img src="./image/5.png" alt="d" width="900px">
+ <img src="./image/5.PNG" alt="d" width="900px">
 
 ---
 
@@ -154,7 +154,7 @@ lecture: 258
 
 **_xem lai folder fetch data using redux thunk_** - this folder not using `redux toolkit` - it use `redux thunk`
 
- <img src="./image/6.png" alt="d" width="700px">
+ <img src="./image/6.PNG" alt="d" width="700px">
 
 **_NOTE:_** use `redux toolkit` to create `action creator thunk` to run async code in the `action`;
 
@@ -162,7 +162,7 @@ lecture: 258
 
 `Thunk` is an `function` - that `delay` an `action` util something else finished
 
- <img src="./image/7.png" alt="d" width="700px" height="450px">
+ <img src="./image/7.PNG" alt="d" width="700px" height="450px">
 
 ---
 
@@ -172,7 +172,7 @@ Sinh ra để tối ưu performance cho code
 
 Để không cần `dispatch` data sau khi call `APIs`, ta cần dùng `middleware` redux-thunk, redux-saga => call `APIs` ngay trong action
 
- <img src="./image/1.png" alt="d">
+ <img src="./image/1.PNG" alt="d">
 
 ---
 
@@ -189,7 +189,7 @@ Nói ngắn gọn `middleware` giúp chúng ta xử lý bất đồng bộ trong
 3. => `reducer` will process all the logic and return `state` to store
 4. => component will connect/subscribe to `store` and use that data
 
- <img src="./image/2.png" alt="d">
+ <img src="./image/2.PNG" alt="d">
 
 ---
 
@@ -220,7 +220,7 @@ lecture 254 4p
 **_IMPORTANT_**: because `reducer` are `pure function` => you should never `mutate` state directly
 => with `primitive value` you can do that, because you change state in `reducer` does not `reference` to state in `redux store`
 
- <img src="./image/3.png" alt="d">
+ <img src="./image/3.PNG" alt="d">
 
 ---
 
