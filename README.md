@@ -14,10 +14,13 @@ some little note by myself to remind what i did learn
 | 1   | [ReactDOM - memo - callback](#react-and-reactdom-and-memo-and-callback)     |
 | 2   | [Closure in ReactJS](#closure-in-reactjs) - DIFFICULT                       |
 | 3   | [State scheduling and batching](#state-scheduling-and-batching) - DIFFICULT |
-| 4   | [Redux](#redux)                                                             |
-|     | [Redux middleware](#redux-middleware)                                       |
+| 4   | [Section 18 Redux](#section-18-redux)                                       |
 |     | [Redux in HOOK](#redux-in-functional-component)                             |
 |     | [Redux in CLASS](#redux-in-class-based-component)                           |
+|     | [Where to put async code](#where-to-put-async-code)                         |
+|     | [What is a "Thunk'](#what-is-a-thunk)                                       |
+|     | [Redux middleware](#redux-middleware)                                       |
+|     | [Immutable in Redux](#immutable)                                            |
 
 ---
 
@@ -102,9 +105,9 @@ lecture 159 - watch again
 
 ---
 
-# Section 18
+# Section 18 Redux
 
-# Redux in CLASS-BASED COMPONENT
+## Redux in CLASS-BASED COMPONENT
 
 1. Create `root reducer` contain all `reducer member`
 
@@ -129,13 +132,47 @@ When we change state in `state object` -> Because object are `reference`, so Red
 
 ---
 
+## Where to put async code
+
+It is a best practice to put all the `logic code` to `reducer`, and `async code` in `component` or `action creator thunk`
+
+ <img src="./image/4.PNG" alt="d" width="900px">
+
+---
+
+ <img src="./image/5.png" alt="d" width="900px">
+
+---
+
+## What is a Thunk
+
+(it used with `redux toolkit` we also create `thunk creator action` with `redux thunk`)
+
+**_thunk_**: is an action creator that return another `callback async function` - and inside that callback function it will do `async code` and `dispatch other action` - the callback function will be executed by `redux toolkit` or `redux thunk`
+
+lecture: 258
+
+**_xem lai folder fetch data using redux thunk_** - this folder not using `redux toolkit` - it use `redux thunk`
+
+ <img src="./image/6.png" alt="d" width="700px">
+
+**_NOTE:_** use `redux toolkit` to create `action creator thunk` to run async code in the `action`;
+
+**_Async Action_**: là action chưa sẵn sàn được gọi, sử dụng `redux toolkit` hoặc `redux thunk` để tạo ra `action creator thunk` để trì hoãn việc dispatch => fetch dữ liệu xong mới dispatch
+
+`Thunk` is an `function` - that `delay` an `action` util something else finished
+
+ <img src="./image/7.png" alt="d" width="700px" height="450px">
+
+---
+
 ### Redux middleware
 
 Sinh ra để tối ưu performance cho code
 
 Để không cần `dispatch` data sau khi call `APIs`, ta cần dùng `middleware` redux-thunk, redux-saga => call `APIs` ngay trong action
 
- <img src="./public/1.png" alt="d">
+ <img src="./image/1.png" alt="d">
 
 ---
 
@@ -152,7 +189,7 @@ Nói ngắn gọn `middleware` giúp chúng ta xử lý bất đồng bộ trong
 3. => `reducer` will process all the logic and return `state` to store
 4. => component will connect/subscribe to `store` and use that data
 
- <img src="./public/2.png" alt="d">
+ <img src="./image/2.png" alt="d">
 
 ---
 
@@ -172,7 +209,9 @@ Nói ngắn gọn `middleware` giúp chúng ta xử lý bất đồng bộ trong
 
 `useDispatch` equivalent to `mapDispatchToProps`
 
-## When return state in Redux // IMUTABLE IN REDUX
+## When return state in Redux // IMMUTABLE IN REDUX
+
+## immutable
 
 when return `state` in `Redux` you must **_return all the state_** with the state update, if you just return one state it will `replace` (because redux wont `merge` the state)
 
@@ -181,7 +220,7 @@ lecture 254 4p
 **_IMPORTANT_**: because `reducer` are `pure function` => you should never `mutate` state directly
 => with `primitive value` you can do that, because you change state in `reducer` does not `reference` to state in `redux store`
 
- <img src="./public/3.png" alt="d">
+ <img src="./image/3.png" alt="d">
 
 ---
 
@@ -234,8 +273,6 @@ a way to avoid mutate:
     }
   }
 ```
-
-## Async Code in Redux
 
 ## Redux toolkit
 
