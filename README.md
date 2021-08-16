@@ -1,4 +1,4 @@
-# What the f-ck is ReactJS
+# React JS note
 
 NhanNguyen
 
